@@ -62,6 +62,9 @@ let g:indentLine_setColors = 0
 " Make Backspace not Stupid
 set backspace=indent,eol,start
 
+" Color the 88th column
+set colorcolumn=88
+
 " Use Enter and Shift-Enter to insert newlines without INSERT mode
 nmap <CR> o<Esc>k
 " this one doesn't work :(
