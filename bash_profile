@@ -9,6 +9,10 @@ export VISUAL='/usr/local/Cellar/vim/8.0.0604'
 export EDITOR='$VISUAL'
 export GIT_EDITOR='$VISUAL'
 
+gatling_helpers () {
+  echo "JAVA_OPTS=\"-Denv=local1\" sh bin/gatling.sh -rf results/local/17-8-0/"
+}
+
 curl_helpers ()
 {
   echo '"http://local.marqeta.com:8080/v3/"'
@@ -78,7 +82,9 @@ alias testc="cd ~/Workspace/test_suites/c-test-suite/app"
 alias rt1="rake test env=local1"
 alias rt2="rake test env=local2"
 alias rt3="rake test env=local3"
-alias fire-gatling="JAVA_OPTS=\"-Denv=local1\" sh bin/gatling.sh -rf results/local/17-8-0/"
+alias gatling="cd ~/Workspace/gatling-perf"
+alias run_gatling=execute_gatling
+alias localaws="cd ~/Workspace/awsvagrant"
 
 # Navigate to Vagrant, SSH, get to logs as root
 alias logs="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard; ls -altr; bash'\""
@@ -107,6 +113,10 @@ ping-payments() {
   echo -e "___ Payment 2 ___"
   curl --silent local2.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
   echo -e "\n"
+}
+
+execute_gatling() {
+  JAVA_OPTS="-Denv=$1" sh bin/gatling.sh -rf results/local/$2/
 }
 
 # STOLEN LIKE A THIEF
