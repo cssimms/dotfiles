@@ -5,7 +5,7 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 source ~/git-completion.bash
-export VISUAL='/usr/local/Cellar/vim/8.0.0604'
+export VISUAL='/usr/local/bin/vim'
 export EDITOR='$VISUAL'
 export GIT_EDITOR='$VISUAL'
 
@@ -72,7 +72,7 @@ alias be="bundle exec"
 
 # Testing Alias
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
-alias docker="cd ~/Workspace/localdocker"
+alias localdocker="cd ~/Workspace/localdocker"
 alias tests="cd ~/Workspace/test_suites"
 alias rspcf="rspec --format documentation"
 alias rspecf="rspec --format documentation"
