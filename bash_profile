@@ -2,7 +2,8 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# jEnv in front, rvm in the back
+export PATH="$HOME/.jenv/bin:$PATH:$HOME/.rvm/bin" 
 
 source ~/git-completion.bash
 export VISUAL='/usr/local/bin/vim'
@@ -42,6 +43,7 @@ export HISTCONTROL=ignoredups
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Git Alias
+alias wch="watch "
 alias gs="git status"
 alias ga="git add ."
 alias gc="git commit -m"
@@ -64,8 +66,8 @@ alias pud="pushd"
 alias ppd="popd"
 alias ll="ls -al"
 alias grel="grep"
-alias bp="vim ~/.bash_profile"
-alias vrc="vim ~/.vimrc"
+alias bp="mvim ~/.bash_profile"
+alias vrc="mvim ~/.vimrc"
 
 # Rails Alias
 alias be="bundle exec"
@@ -83,7 +85,6 @@ alias rt1="rake test env=local1"
 alias rt2="rake test env=local2"
 alias rt3="rake test env=local3"
 alias gatling="cd ~/Workspace/gatling-perf"
-alias run_gatling=execute_gatling
 alias localaws="cd ~/Workspace/awsvagrant"
 
 # Navigate to Vagrant, SSH, get to logs as root
@@ -105,18 +106,31 @@ local_ping() {
   echo -e "\n"
 }
 
-alias ping-payments=payments_ping
+alias pp=ping_payments
 # not returning the entire branch name after a second '.'
-ping-payments() {
+ping_payments() {
   echo -e "\n___ Payment 1 ___"
-  curl --silent local1.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
+  curl --silent https://payment1-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
   echo -e "___ Payment 2 ___"
-  curl --silent local2.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
+  curl --silent https://payment1-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
   echo -e "\n"
 }
 
-execute_gatling() {
+alias rg=run_gatling
+run_gatling() {
   JAVA_OPTS="-Denv=$1" sh bin/gatling.sh -rf results/local/$2/
+}
+
+alias sb="jenkins_switch_branch $1 $2"
+jenkins_switch_branch() {
+  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build switch_branch -f -v -p container=$1 -p branch=$2 -p program=doordash
+  echo "Deploying ${$2} to ${$1}..."
+}
+
+alias rc="jenkins_restart_containers"
+jenkins_restart_containers() {
+  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build restart_container -f -v
+  echo "Restarting containers..."
 }
 
 # STOLEN LIKE A THIEF
@@ -197,5 +211,6 @@ git_prompt() {
         echo -e "\x01$color\x02[$branch$state]\x01\033[00m\x02"  # last bit resets color
     fi
 }
+
 
 PS1='\u|$(git_prompt)|\W:~> '
