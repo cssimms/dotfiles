@@ -1,6 +1,6 @@
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
-# jEnv in front, rvm should be auto-configured
+# jEnv in front, rvm wants to be in bashrc for some reason
 PATH="$HOME/.jenv/bin:$PATH"
 
 source ~/git-completion.bash
