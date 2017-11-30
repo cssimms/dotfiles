@@ -280,7 +280,7 @@ nmap <Leader>ws :call StripTrailingWhitespace()<CR>
 
 " Testing Specific Commands
 " Add or Remove Test Tag at top of File and Write to File
-nmap <Leader>tes gg/do<CR>i,<Space>test:true<Space><Esc>:w<CR>
+nmap <Leader>tes gg/<Space>do<CR>i,<Space>test:true<Space><Esc>:w<CR>
 nmap <Leader>rtes gg/,<Space>test:<CR>4dw:w<CR>
 
 " Insert or remove Byebug
