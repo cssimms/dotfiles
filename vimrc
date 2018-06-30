@@ -18,9 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-Plugin 'tpope/vim-fugitive'
-
-Plugin 'ayu-theme/ayu-vim'
+"Plugin 'tpope/vim-fugitive'
 
 Plugin 'Yggdroot/indentLine'
 
@@ -56,7 +54,7 @@ set lazyredraw
 " Set macvim specific stuff
 if has("gui_macvim")
 
-  "speciial font
+  "special font
   set guifont=Monaco\ for\ Powerline
 
   "highlight colors
@@ -66,6 +64,9 @@ if has("gui_macvim")
   " colorscheme
   set termguicolors
   highlight LineNr guifg=darkgrey
+
+  " remove scrollbars
+  set guioptions=
 endif
 
 
@@ -73,8 +74,13 @@ endif
 autocmd FileType netrw setl bufhidden=delete
 
 " Set Tabs to be Better
+" default is two
 set ts=2 sts=2 sw=2 expandtab
-"
+
+" python and js are four
+autocmd Filetype python setlocal ts=4 sw=4 sts=4 noexpandtab
+"autocmd Filetype javascript setlocal ts=4 sw=4 sts=4 noexpandtab
+
 " IndentLine
 let g:indentLine_char = '|'
 let g:indentLine_first_char = '|'
@@ -280,15 +286,20 @@ nmap <Leader>ws :call StripTrailingWhitespace()<CR>
 
 " Testing Specific Commands
 " Add or Remove Test Tag at top of File and Write to File
+" Test Right Here - goes to inner-most context block and inserts test tag
 nmap <Leader>tes gg/<Space>do<CR>i,<Space>test:true<Esc>:w<CR>
+nmap <Leader>trh ?context<Space><CR>/<Space>do<CR>i,<Space>test:true<Esc>:w<CR>
 nmap <Leader>rtes gg/,<Space>test:<CR>4cw<Esc>:w<CR>
 
 " Insert or remove Byebug
 nmap <Leader>d obyebug<Esc>:w<CR>
 nmap <Leader>rd /byebug<CR>dd:w<CR>
 
+" Boiler Plate Config
+nmap <Leader>url o@base_url = Config.base_url<CR>@headers = Config.headers<Esc>
+
 " Snippet for response and data from http request
-nmap <Leader>post oresponse = http_post "#{@base_url}/", body.to_json, @headers<CR>data = JSON.parse response<Esc>k^f/
+nmap <Leader>post oresponse = http_post "#{@base_url}/", body, @headers<CR>data = JSON.parse response<Esc>k^f/
 nmap <Leader>get oresponse = http_get "#{@base_url}/", @headers<CR>data = JSON.parse response<Esc>k^f/
 
 " Post an empty user
@@ -306,7 +317,8 @@ set timeoutlen=1000 ttimeoutlen=0
 
 " CtrlP Fuzzy finder stuff
 map <Leader>b :CtrlPBuffer<CR>
-map <Leader>t :CtrlP<CR>
+"map <Leader>t :CtrlP<CR>
+map <Leader>f :CtrlPLine<CR>
 let g:ctrlp_match_window = 'results:30' " overcome limit imposed by max height
 
 " Ignore big unneccesary directories

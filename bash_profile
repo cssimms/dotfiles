@@ -53,6 +53,7 @@ alias ga="git add ."
 alias gc="git commit -m"
 alias gb="git branch"
 alias gdm="git diff master --name-only"
+alias gdc="git diff --cached"
 alias gch="git checkout"
 alias st="pwd | grep --color='auto' -E -o '\/.-test-suite'; git branch && git status"
 alias gf="git fetch --all"
@@ -65,6 +66,8 @@ __git_complete gch _git_checkout
 __git_complete gb _git_branch
 
 # General Use Alias
+alias mv="mv -i"
+alias cp="cp -i"
 alias ..="cd .."
 alias pud="pushd"
 alias ppd="popd"
@@ -73,8 +76,11 @@ alias grel="grep"
 alias bp="mvim ~/.bash_profile"
 alias vrc="mvim ~/.vimrc"
 
-# Rails Alias
+# Wam Alias
 alias be="bundle exec"
+alias rr="bundle exec rake routes"
+alias rail="rails"
+alias wam="cd ~/Workspace/wam"
 
 # Testing Alias
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
@@ -91,6 +97,16 @@ alias rt3="rake test env=local3"
 alias gatling="cd ~/Workspace/gatling-perf"
 alias localaws="cd ~/Workspace/awsvagrant"
 
+# Tag all files different than master as test:true
+alias tdat="tag_diff_as_test"
+tag_diff_as_test() {
+  original_path=pwd
+  cd `git rev-parse --show-toplevel`
+  git diff master --name-only | xargs mvim -c "bufdo exec \"norm 1 tes\""
+  # Not able to cd back b/c we lose focus on bash. need another tool to return focus
+  cd original_path
+}
+
 # Navigate to Vagrant, SSH, get to logs as root
 alias logs="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard; ls -altr; bash'\""
 
@@ -98,21 +114,27 @@ alias logs1="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh 
 alias logs2="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard/local2; ls -altr; bash'\""
 alias logs3="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard/local3; ls -altr; bash'\""
 
+# Same, but for Remote / Hyrdo
+# not currently working the way I would like, the ending bash is weird
+alias logsremote="ssh -t lvpmtqapool01 \"sh -c 'cd /var/log/jcard/local6; ls -altr;'\""
+
+alias remote="ssh -t lvpmtqapool01"
+
 # Pretty Git Log, pass the number of records to view
 alias gl="pretty_git_log $1"
 pretty_git_log() {
-  git log -10 --pretty=format:'%h - %an, %ar : %s'
+  lines_to_show=${1:-10}
+  git log -${lines_to_show} --pretty=format:'%h - %an, %ar : %s'
 }
 
 # Ping all Local Dockers
 alias lp=local_ping
 local_ping() {
-  echo -e "\n___ Local 1 ___"
-  curl --silent local1.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
-  echo -e "___ Local 2 ___"
-  curl --silent local2.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
-  echo -e "___ Local 3 ___"
-  curl --silent local3.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
+  for i in {1..3};
+  do
+    echo -e "\n___ Local $i ___"
+    curl --silent "local$i.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
+  done
   echo -e "\n"
 }
 
@@ -122,13 +144,32 @@ ping_payments() {
   echo -e "\n___ Payment 1 ___"
   curl --silent https://payment1-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
   echo -e "___ Payment 2 ___"
-  curl --silent https://payment1-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
+  curl --silent https://payment2-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
+  echo -e "\n"
+}
+
+alias pr=ping_remote
+# not returning the entire branch name after a second '.'
+ping_remote() {
+  echo -e "\n___ Remote (Local 6) ___"
+  curl --silent http://local6.qa.marqeta.com/v3/ping #| grep -E -o ".version\"\:\".+?\""
+  echo -e "\n"
+}
+
+# Ping all Hydras
+alias par=ping_all_remotes
+ping_all_remotes() {
+  for i in {1..15};
+  do
+    echo -e "\n___ Local $i ___"
+    curl --silent "local$i.qa.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
+  done
   echo -e "\n"
 }
 
 alias rg=run_gatling
 run_gatling() {
-  if [ -z $1 ] || [ -z $2 ] 
+  if [ -z $1 ] || [ -z $2 ]
   then
     echo "Please supply the target env and result directory"
     echo "ex - rg local1 regressions"
@@ -143,10 +184,25 @@ jenkins_switch_branch() {
   echo "Deploying ${$2} to ${$1}..."
 }
 
+alias sb_mt="jenkins_switch_branch_multi_tenant $1 $2"
+jenkins_switch_branch_multi_tenant() {
+  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build switch2_mt_branch -f -v -p container=$1 -p branch=$2
+  echo "Deploying ${$2} to ${$1} as Multi Tenant Instance..."
+}
+
 alias rc="jenkins_restart_containers"
 jenkins_restart_containers() {
-  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build restart_container -f -v
-  echo "Restarting containers..."
+  # stolen shamelessly from https://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script
+  echo "Are you sure you want to restart all containers?"
+  read -p "y/n " -n 1 -r
+  echo 
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    echo "Restarting containers..."
+    java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build restart_container -f -v
+  else
+    echo "Alrighty - quitter"
+  fi
 }
 
 # STOLEN LIKE A THIEF
