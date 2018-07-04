@@ -1,5 +1,8 @@
-First attempt to keep my dotfile organized. 
-Sticking to .bash_profile and .vimrc for now, as I don't need to get all crazy.
+#### Keeping my dotfiles orgnized
 
-Someday I'll figure out what was wrong with my symlinks, for now I'm just setting up by copying the files from
-a local directory into ~
+Just seems like a good idea as these are the result of months of small realizations and 
+tweaks and research. 
+
+For setup, simply clone the repo into any directory, and create a soft link in the home 
+directory. Will require some path changes on a different machine, but the imortant bits
+will be there.
