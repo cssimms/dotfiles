@@ -75,12 +75,16 @@ alias ll="ls -al"
 alias grel="grep"
 alias bp="mvim ~/.bash_profile"
 alias vrc="mvim ~/.vimrc"
+alias nrc="nvim ~/.nvimrc"
+alias notes="cd ~/Workspace/notes && nvim ."
 
 # Wam Alias
 alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
 alias wam="cd ~/Workspace/wam"
+alias wdock="cd ~/Workspace/wam/wam-docker/"
+alias mon="cd ~/Workspace/wam/monterey"
 
 # Testing Alias
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
