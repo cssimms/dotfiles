@@ -146,6 +146,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+inoremap <C-J> <Esc><C-W><C-J>
+inoremap <C-K> <Esc><C-W><C-K>
+inoremap <C-L> <Esc><C-W><C-L>
+inoremap <C-H> <Esc><C-W><C-H>
 
 " Buffer Nav
 nmap <Leader>ls :ls<CR>:
@@ -153,8 +157,21 @@ nmap <Leader>] :bn<CR>
 nmap <Leader>[ :bp<CR>
 nmap <Leader>\ <C-^>
 
+"____"____"____ Interactive Terminal Mode 
+
 " Open terminal buffer vert split
 nnoremap <Leader>z :vsplit<CR>:terminal<CR>isource ~/.bash_profile<CR>
+
+nmap <Leader>tr :terminal<CR>
+
+" Make escape not stupid in Terminal Mode
+tnoremap <Esc> <C-\><C-n>
+
+" Switch windows quickly
+tnoremap <C-J> <Esc><C-W><C-J>
+tnoremap <C-K> <Esc><C-W><C-K>
+tnoremap <C-L> <Esc><C-W><C-L>
+tnoremap <C-H> <Esc><C-W><C-H>
 
 " From StackOverflow - with my own regex to include tabs
 function! StripTrailingWhitespace()
@@ -216,6 +233,3 @@ map <C-p> :Files ./<CR>
 map <C-b> :Buffers<CR>
 map <C-f> :Ag 
 
-"____"____"____ Interactive Terminal Mode 
-nmap <Leader>tr :terminal<CR>
-tnoremap <Esc> <C-\><C-n>
