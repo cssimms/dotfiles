@@ -52,12 +52,15 @@ alias gs="git status"
 alias ga="git add ."
 alias gc="git commit -m"
 alias gb="git branch"
-alias gdm="git diff master --name-only"
+alias gd="git diff"
 alias gdc="git diff --cached"
+alias gdm="git diff master --name-only"
 alias gch="git checkout"
 alias st="pwd | grep --color='auto' -E -o '\/.-test-suite'; git branch && git status"
 alias gf="git fetch --all"
 alias gpm="git pull origin master"
+alias gstash="git stash"
+alias gstl="git stash list"
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
 
@@ -78,7 +81,11 @@ alias vrc="mvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
 
-# Wam Alias
+# Searching stuff...
+alias acl='ack'
+alias ag='ag --path-to-ignore ~/.ignore --color-path "1;36"'
+
+# Wam Stuff
 alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
@@ -86,7 +93,18 @@ alias wam="cd ~/Workspace/wam"
 alias wdock="cd ~/Workspace/wam/wam-docker/"
 alias mon="cd ~/Workspace/wam/monterey"
 
-# Testing Alias
+alias wp=ping_wam
+ping_wam() {
+  echo -e "\n___ PAPI ___"
+  curl --silent http://localhost:8080/v3/ping | grep -E -o ".version\"\:\".+?\""
+  echo -e "___ DNA API ___"
+  curl --silent http://localhost:8081/dna-api/ping | grep -E -o ".build_version\"\:\".+?\""
+  echo -e "___ DNA API ___"
+  curl --silent http://localhost:9081/zion-api/ping | grep -E -o ".success\"\:.+$"
+  echo -e "\n"
+}
+
+# Testing Stuff
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
 alias localdocker="cd ~/Workspace/localdocker"
 alias tests="cd ~/Workspace/test_suites"
@@ -289,5 +307,3 @@ git_prompt() {
 }
 
 PS1='\u|$(git_prompt)|\W:~> '
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

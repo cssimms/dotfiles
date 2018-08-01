@@ -127,7 +127,7 @@ vmap <Leader>s :w<CR>
 " I open vimrc a lot
 nmap <Leader>vrc :e ~/.nvimrc<CR>
 
-" set copy/paste 
+" set copy/paste
 "vmap <Leader>y :w !pbcopy<CR>
 "nmap <Leader>p :r !pbpaste<CR>
 vnoremap  <Leader>y  "+y
@@ -151,13 +151,16 @@ inoremap <C-K> <Esc><C-W><C-K>
 inoremap <C-L> <Esc><C-W><C-L>
 inoremap <C-H> <Esc><C-W><C-H>
 
+" close window faster
+nnoremap <Leader>q :q<CR>
+
 " Buffer Nav
 nmap <Leader>ls :ls<CR>:
 nmap <Leader>] :bn<CR>
 nmap <Leader>[ :bp<CR>
 nmap <Leader>\ <C-^>
 
-"____"____"____ Interactive Terminal Mode 
+"____"____"____ Interactive Terminal Mode
 
 " Open terminal buffer vert split
 nnoremap <Leader>z :vsplit<CR>:terminal<CR>isource ~/.bash_profile<CR>
@@ -213,6 +216,7 @@ nmap <Leader>use o@user_token = JSON.parse(http_post "#{@base_url}/users", {}.to
 
 " WAM Web Dev Commands
 
+" js if snippet
 nmap <Leader>if oif () {<CR>};<Esc>kf(
 
 
@@ -232,4 +236,25 @@ nmap <Leader>if oif () {<CR>};<Esc>kf(
 map <C-p> :Files ./<CR>
 map <C-b> :Buffers<CR>
 map <C-f> :Ag 
+
+" general fzf colors, doesn't apply to Ag 
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Keyword'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Change the color output of the filepaths, and use the fzf preview <3
+" Stolen from Github
+" https://github.com/junegunn/fzf.vim/issues/394
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path "1;36"', fzf#vim#with_preview(), <bang>0)
 
