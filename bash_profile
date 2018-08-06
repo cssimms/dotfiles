@@ -86,6 +86,11 @@ alias acl='ack'
 alias ag='ag --path-to-ignore ~/.ignore --color-path "1;36"'
 
 # Wam Stuff
+
+# FzF config
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# Wam Alias
 alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
