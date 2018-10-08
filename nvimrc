@@ -21,6 +21,8 @@ Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 
+Plug 'pangloss/vim-javascript'
+
 call plug#end()            " required
 
 "____"____"____ GENERAL SETTINGS "____"____"____
