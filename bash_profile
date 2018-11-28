@@ -125,7 +125,7 @@ alias qdock="cd ~/Workspace/qe-docker"
 alias qd="cd ~/Workspace/qe-docker"
 
 alias dc="docker-compose"
-
+alias stand="docker-compose up -d && docker-compose logs -f"
 alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
 
 alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""

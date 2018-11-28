@@ -222,7 +222,12 @@ nmap <Leader>use o@user_token = JSON.parse(http_post "#{@base_url}/users", {}.to
 
 " js if snippet
 nmap <Leader>if oif () {<CR>};<Esc>kf(
+nmap <Leader>rp oconst propTypes = {<CR>};<CR><CR>const defaultProps = {<CR>};<CR><Esc>/const<CR>wviwyGko<Esc>pa.propTypes = propTypes;<Esc>yypf.wcwdefaultProps<Esc>2w.o<Esc>gg/propTypes<CR>j
 
+
+"____"____"____ Functions "____"____"____
+
+command! Reload source ~/.nvimrc
 
 " CtrlP Fuzzy finder stuff
 "map <C-b> :CtrlPBuffer<CR>
