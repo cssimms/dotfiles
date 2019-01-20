@@ -64,9 +64,10 @@ set backspace=indent,eol,start
 " Color Scheme Setup
 syntax enable
 set t_Co=256
-set background=dark
 "colorscheme solarized
+"set background=light
 colorscheme base16-default-dark
+set background=dark
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
@@ -161,6 +162,7 @@ nmap <Leader>ls :ls<CR>:
 nmap <Leader>] :bn<CR>
 nmap <Leader>[ :bp<CR>
 nmap <Leader>\ <C-^>
+nmap <Leader>bd :bd<CR>
 
 "____"____"____ Interactive Terminal Mode
 
@@ -220,7 +222,12 @@ nmap <Leader>use o@user_token = JSON.parse(http_post "#{@base_url}/users", {}.to
 
 " js if snippet
 nmap <Leader>if oif () {<CR>};<Esc>kf(
+nmap <Leader>rp oconst propTypes = {<CR>};<CR><CR>const defaultProps = {<CR>};<CR><Esc>/const<CR>wviwyGko<Esc>pa.propTypes = propTypes;<Esc>yypf.wcwdefaultProps<Esc>2w.o<Esc>gg/propTypes<CR>j
 
+
+"____"____"____ Functions "____"____"____
+
+command! Reload source ~/.nvimrc
 
 " CtrlP Fuzzy finder stuff
 "map <C-b> :CtrlPBuffer<CR>
@@ -258,5 +265,5 @@ let g:fzf_colors =
 " Change the color output of the filepaths, and use the fzf preview <3
 " Stolen from Github
 " https://github.com/junegunn/fzf.vim/issues/394
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path "1;36"', fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path "1;36" --path-to-ignore ~/.ignore', fzf#vim#with_preview(), <bang>0)
 

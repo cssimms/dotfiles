@@ -4,7 +4,7 @@
 PATH="$HOME/.jenv/bin:$PATH"
 
 source ~/git-completion.bash
-export VISUAL='/usr/local/bin/vim'
+export VISUAL='/usr/local/bin/nvim'
 export EDITOR='$VISUAL'
 export GIT_EDITOR='$VISUAL'
 
@@ -29,6 +29,9 @@ curl_helpers ()
   echo '-H "Authorization: Basic YWRtaW5fY29uc3VtZXI6bWFycWV0YQ=="'
   echo "curl -X METHOD HEADERS -d '{json}' URL | python -m json.tool"
 }
+
+############ fzf/ag/whateverthefuck ############
+#export FZF_DEFAULT_COMMAND="ag -g \"\" --path-to-ignore ~/.ignore"
 
 ############ COOLORS ############
 
@@ -60,7 +63,8 @@ alias st="pwd | grep --color='auto' -E -o '\/.-test-suite'; git branch && git st
 alias gf="git fetch --all"
 alias gpm="git pull origin master"
 alias gstash="git stash"
-alias gstl="git stash list"
+alias gsl="git stash list"
+
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
 
@@ -69,6 +73,7 @@ __git_complete gch _git_checkout
 __git_complete gb _git_branch
 
 # General Use Alias
+alias reload="source ~/.bash_profile"
 alias mv="mv -i"
 alias cp="cp -i"
 alias ..="cd .."
@@ -76,8 +81,8 @@ alias pud="pushd"
 alias ppd="popd"
 alias ll="ls -al"
 alias grel="grep"
-alias bp="mvim ~/.bash_profile"
-alias vrc="mvim ~/.vimrc"
+alias bp="nvim ~/.bash_profile"
+alias vrc="nvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
 
@@ -96,7 +101,10 @@ alias rr="bundle exec rake routes"
 alias rail="rails"
 alias wam="cd ~/Workspace/wam"
 alias wdock="cd ~/Workspace/wam/wam-docker/"
+alias wd="cd ~/Workspace/wam/wam-docker/"
 alias mon="cd ~/Workspace/wam/monterey"
+alias pd="cd ~/Workspace/wam/program-dashboard"
+alias sushi="cd ~/Workspace/wam/sushi_boat"
 
 alias wp=ping_wam
 ping_wam() {
@@ -104,8 +112,33 @@ ping_wam() {
   curl --silent http://localhost:8080/v3/ping | grep -E -o ".version\"\:\".+?\""
   echo -e "___ DNA API ___"
   curl --silent http://localhost:8081/dna-api/ping | grep -E -o ".build_version\"\:\".+?\""
-  echo -e "___ DNA API ___"
+  echo -e "___ Zion API ___"
   curl --silent http://localhost:9081/zion-api/ping | grep -E -o ".success\"\:.+$"
+  echo -e "\n"
+}
+
+# Docker Env Stuff
+alias wdock="cd ~/Workspace/wam/wam-docker/"
+alias wd="cd ~/Workspace/wam/wam-docker/"
+
+alias qdock="cd ~/Workspace/qe-docker"
+alias qd="cd ~/Workspace/qe-docker"
+
+alias dc="docker-compose"
+alias stand="docker-compose up -d && docker-compose logs -f"
+alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
+
+alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
+alias lp=local_ping
+local_ping() {
+  echo -e "\n___ PAPI ___"
+  curl --silent http://localhost:8080/v3/ping | grep -E -o ".version\"\:\".+?\""
+  echo -e "___ DNA ___"
+  curl --silent http://localhost:8081/dna-api/ping | grep -E -o ".build_version\"\:\".+?\""
+  echo -e "___ Zion ___"
+  curl --silent http://localhost:9081/zion-api/ping | grep -E -o ".success\"\:.+$"
+  echo -e "___ Consul ___"
+  curl --silent http://localhost:8500/v1/status/leader #| grep -E -o ".success\"\:.+$"
   echo -e "\n"
 }
 
@@ -155,15 +188,15 @@ pretty_git_log() {
 }
 
 # Ping all Local Dockers
-alias lp=local_ping
-local_ping() {
-  for i in {1..3};
-  do
-    echo -e "\n___ Local $i ___"
-    curl --silent "local$i.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
-  done
-  echo -e "\n"
-}
+#alias lp=local_ping
+#local_ping() {
+  #for i in {1..3};
+  #do
+    #echo -e "\n___ Local $i ___"
+    #curl --silent "local$i.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
+  #done
+  #echo -e "\n"
+#}
 
 alias pp=ping_payments
 # not returning the entire branch name after a second '.'
