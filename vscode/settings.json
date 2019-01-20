@@ -1,0 +1,37 @@
+{
+    "files.autoSave": "onFocusChange",
+
+    // ~~ WorkBench ~~ //
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.sideBar.location": "right",
+    "workbench.editor.labelFormat": "short",
+    "workbench.panel.defaultLocation": "right",
+    "workbench.startupEditor": "newUntitledFile",
+
+    // ~~ Editor ~~ //
+    "editor.fontFamily": "Menlo, Monaco",
+    "editor.lineNumbers": "relative",
+    "editor.tabSize": 2,
+
+    "keyboard.dispatch": "keyCode",
+
+    "window.zoomLevel": 2,
+
+    // ~~ Vim related ~~ //
+    "vim.hlsearch": true,
+    "vim.useCtrlKeys": true,
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<leader>", "s"],
+          "commands": [":w"]
+        },
+        // {
+        //   "before": ["<C-n>"],
+        //   "commands": [":nohl"]
+        // }
+    ],
+
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 88,
+}
