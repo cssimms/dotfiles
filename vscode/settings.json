@@ -1,5 +1,9 @@
 {
     "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "window.zoomLevel": 0,
 
     // ~~ WorkBench ~~ //
     "workbench.colorTheme": "Solarized Dark",
@@ -7,19 +11,28 @@
     "workbench.editor.labelFormat": "short",
     "workbench.panel.defaultLocation": "right",
     "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
 
     // ~~ Editor ~~ //
     "editor.fontFamily": "Menlo, Monaco",
     "editor.lineNumbers": "relative",
     "editor.tabSize": 2,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 88,
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+      80,
+      120
+    ],
 
     "keyboard.dispatch": "keyCode",
 
-    "window.zoomLevel": 2,
 
     // ~~ Vim related ~~ //
     "vim.hlsearch": true,
     "vim.useCtrlKeys": true,
+    "vim.useSystemClipboard": false,
+
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -30,8 +43,36 @@
         //   "before": ["<C-n>"],
         //   "commands": [":nohl"]
         // }
+        {
+          "before": ["<leader>", "s"],
+          "commands": ["workbench.action.files.save"]
+        },
+        {
+          "before": ["<C-n>"],
+          "commands": [":nohl"]
+        },
+        {
+          "before": ["<leader>", "d"],
+          // "commands": ["editor.debug.action.toggleBreakpoint"]
+          "after": ["o", "b", "i", "n", "d", "i", "n", "g", ".", "p", "r", "y", "<esc>"]
+        },
+        {
+          "before":["<leader>", "r"],
+          "commands":[":reg"]
+        },
+        {
+          "before":["<esc>"],
+          "commands":[":nohl"],
+          "after":["<esc>"]
+        },
+        {
+          "before":["<leader>", "\\"],
+          "commands":["workbench.action.quickOpenNavigateNextInEditorPicker"]
+        }
     ],
 
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 88,
+    // ~~ Ruby ~~ //
+    "ruby.useLanguageServer": true,
+    "ruby.codeCompletion": "rcodetools",
+    "ruby.intellisense": "rubyLocate"
 }
