@@ -86,10 +86,6 @@ alias vrc="nvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
 
-# Searching stuff...
-alias acl='ack'
-alias ag='ag --path-to-ignore ~/.ignore --color-path "1;36"'
-
 # Wam Stuff
 
 # FzF config
