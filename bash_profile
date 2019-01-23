@@ -2,6 +2,7 @@
 
 # jEnv in front, rvm wants to be in bashrc for some reason
 PATH="$HOME/.jenv/bin:$PATH"
+PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 source ~/git-completion.bash
 export VISUAL='/usr/local/bin/nvim'
@@ -122,6 +123,7 @@ alias qd="cd ~/Workspace/qe-docker"
 
 alias dc="docker-compose"
 alias stand="docker-compose up -d && docker-compose logs -f"
+alias sit="docker-compose down"
 alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
 
 alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
