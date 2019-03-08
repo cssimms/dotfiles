@@ -5,6 +5,7 @@
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
 
+
     // ~~ WorkBench ~~ //
     "workbench.colorTheme": "Solarized Dark",
     "workbench.sideBar.location": "right",
@@ -37,14 +38,6 @@
     "vim.normalModeKeyBindingsNonRecursive": [
         {
           "before": ["<leader>", "s"],
-          "commands": [":w"]
-        },
-        // {
-        //   "before": ["<C-n>"],
-        //   "commands": [":nohl"]
-        // }
-        {
-          "before": ["<leader>", "s"],
           "commands": ["workbench.action.files.save"]
         },
         {
@@ -74,5 +67,8 @@
     // ~~ Ruby ~~ //
     "ruby.useLanguageServer": true,
     "ruby.codeCompletion": "rcodetools",
-    "ruby.intellisense": "rubyLocate"
+    "ruby.intellisense": "rubyLocate",
+    "breadcrumbs.enabled": true,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false
 }

@@ -82,6 +82,7 @@ highlight Comment gui=italic
 
 " Color the 88th column
 set colorcolumn=88
+set tw=88
 
 " Make Status Bar always show at the bottom
 set laststatus=2

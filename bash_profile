@@ -105,6 +105,7 @@ alias wdock="cd ~/Workspace/wam/wam-docker/"
 alias wd="cd ~/Workspace/wam/wam-docker/"
 alias mon="cd ~/Workspace/wam/monterey"
 alias pd="cd ~/Workspace/wam/program-dashboard"
+alias volt="cd ~/Workspace/wam/wam/packages/voltron"
 alias sushi="cd ~/Workspace/wam/sushi_boat"
 
 alias wp=ping_wam
