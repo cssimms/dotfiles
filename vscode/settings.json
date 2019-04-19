@@ -63,12 +63,19 @@
           "commands":["workbench.action.quickOpenNavigateNextInEditorPicker"]
         }
     ],
-
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+          "before":["<esc>"],
+          "commands":[":nohl"],
+          "after":["<esc>"]
+        },
+    ],
     // ~~ Ruby ~~ //
     "ruby.useLanguageServer": true,
     "ruby.codeCompletion": "rcodetools",
     "ruby.intellisense": "rubyLocate",
-    "breadcrumbs.enabled": true,
-    "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false
+    "explorer.confirmDelete": false,
+    "breadcrumbs.enabled": true,
+    "javascript.implicitProjectConfig.experimentalDecorators": true
 }

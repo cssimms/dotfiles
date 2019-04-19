@@ -4,7 +4,7 @@
 PATH="$HOME/.jenv/bin:$PATH"
 PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-source ~/git-completion.bash
+source ~/.git-completion.bash
 export VISUAL='/usr/local/bin/nvim'
 export EDITOR='$VISUAL'
 export GIT_EDITOR='$VISUAL'
