@@ -64,10 +64,19 @@ set backspace=indent,eol,start
 " Color Scheme Setup
 syntax enable
 set t_Co=256
-"colorscheme solarized
-"set background=light
-colorscheme base16-default-dark
-set background=dark
+if has("gui_macvim")
+  " needed to close interactive buffers w/o force
+  set hidden
+
+  " solarized is nice
+  colorscheme solarized
+  set background=dark
+else 
+  " but in terminal want to match terminal
+  colorscheme base16-default-dark
+  set background=dark
+endif
+
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 

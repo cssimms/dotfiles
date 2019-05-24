@@ -23,14 +23,11 @@ gatling_helpers () {
   echo "JAVA_OPTS=\"-Denv=local1\" sh bin/gatling.sh -rf results/local/17-8-0/"
 }
 
-curl_helpers ()
+# not tested ....
+swab()
 {
-  echo '"http://local.marqeta.com:8080/v3/"'
-  echo '-H "Content-Type: application/json"'
-  echo '-H "Authorization: Basic YWRtaW5fY29uc3VtZXI6bWFycWV0YQ=="'
-  echo "curl -X METHOD HEADERS -d '{json}' URL | python -m json.tool"
+  git branch --merged master --no-color | grep -v '^[ *]*master$' | xargs -n1 git branch -d
 }
-
 ############ fzf/ag/whateverthefuck ############
 #export FZF_DEFAULT_COMMAND="ag -g \"\" --path-to-ignore ~/.ignore"
 
@@ -65,9 +62,17 @@ alias gf="git fetch --all"
 alias gpm="git pull origin master"
 alias gstash="git stash"
 alias gsl="git stash list"
+alias gt="git tag --sort=-creatordate"
 
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
+
+# Pretty Git Log, pass the number of records to view
+alias gl="pretty_git_log $1"
+pretty_git_log() {
+  lines_to_show=${1:-10}
+  git log -${lines_to_show} --pretty=format:'%h - %an, %ar : %s'
+}
 
 # Set AutoComplete for Git Alias'
 __git_complete gch _git_checkout
@@ -86,6 +91,7 @@ alias bp="nvim ~/.bash_profile"
 alias vrc="nvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
+alias vim="mvim -u ~/.nvimrc"
 
 # Wam Stuff
 
@@ -128,18 +134,6 @@ alias sit="docker-compose down"
 alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
 
 alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
-alias lp=local_ping
-local_ping() {
-  echo -e "\n___ PAPI ___"
-  curl --silent http://localhost:8080/v3/ping | grep -E -o ".version\"\:\".+?\""
-  echo -e "___ DNA ___"
-  curl --silent http://localhost:8081/dna-api/ping | grep -E -o ".build_version\"\:\".+?\""
-  echo -e "___ Zion ___"
-  curl --silent http://localhost:9081/zion-api/ping | grep -E -o ".success\"\:.+$"
-  echo -e "___ Consul ___"
-  curl --silent http://localhost:8500/v1/status/leader #| grep -E -o ".success\"\:.+$"
-  echo -e "\n"
-}
 
 # Testing Stuff
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
@@ -164,104 +158,6 @@ tag_diff_as_test() {
   git diff master --name-only | xargs mvim -c "bufdo exec \"norm 1 tes\""
   # Not able to cd back b/c we lose focus on bash. need another tool to return focus
   cd original_path
-}
-
-# Navigate to Vagrant, SSH, get to logs as root
-alias logs="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard; ls -altr; bash'\""
-
-alias logs1="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard/local1; ls -altr; bash'\""
-alias logs2="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard/local2; ls -altr; bash'\""
-alias logs3="cd ~/Workspace/localdocker && ssh -t vagrant@localdocker \"sudo sh -c 'cd /var/log/jcard/local3; ls -altr; bash'\""
-
-# Same, but for Remote / Hyrdo
-# not currently working the way I would like, the ending bash is weird
-alias logsremote="ssh -t lvpmtqapool01 \"sh -c 'cd /var/log/jcard/local6; ls -altr;'\""
-
-alias remote="ssh -t lvpmtqapool01"
-
-# Pretty Git Log, pass the number of records to view
-alias gl="pretty_git_log $1"
-pretty_git_log() {
-  lines_to_show=${1:-10}
-  git log -${lines_to_show} --pretty=format:'%h - %an, %ar : %s'
-}
-
-# Ping all Local Dockers
-#alias lp=local_ping
-#local_ping() {
-  #for i in {1..3};
-  #do
-    #echo -e "\n___ Local $i ___"
-    #curl --silent "local$i.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
-  #done
-  #echo -e "\n"
-#}
-
-alias pp=ping_payments
-# not returning the entire branch name after a second '.'
-ping_payments() {
-  echo -e "\n___ Payment 1 ___"
-  curl --silent https://payment1-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
-  echo -e "___ Payment 2 ___"
-  curl --silent https://payment2-qa.marqeta.com/v3/ping | grep -E -o ".version\"\:\".+?\""
-  echo -e "\n"
-}
-
-alias pr=ping_remote
-# not returning the entire branch name after a second '.'
-ping_remote() {
-  echo -e "\n___ Remote (Local 6) ___"
-  curl --silent http://local6.qa.marqeta.com/v3/ping #| grep -E -o ".version\"\:\".+?\""
-  echo -e "\n"
-}
-
-# Ping all Hydras
-alias par=ping_all_remotes
-ping_all_remotes() {
-  for i in {1..15};
-  do
-    echo -e "\n___ Local $i ___"
-    curl --silent "local$i.qa.marqeta.com/v3/ping" | grep -E -o ".version\"\:\".+?\""
-  done
-  echo -e "\n"
-}
-
-alias rg=run_gatling
-run_gatling() {
-  if [ -z $1 ] || [ -z $2 ]
-  then
-    echo "Please supply the target env and result directory"
-    echo "ex - rg local1 regressions"
-  else
-    JAVA_OPTS="-Denv=$1" sh bin/gatling.sh -rf results/local/$2/
-  fi
-}
-
-alias sb="jenkins_switch_branch $1 $2"
-jenkins_switch_branch() {
-  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build switch_branch -f -v -p container=$1 -p branch=$2 -p program=doordash
-  echo "Deploying ${$2} to ${$1}..."
-}
-
-alias sb_mt="jenkins_switch_branch_multi_tenant $1 $2"
-jenkins_switch_branch_multi_tenant() {
-  java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build switch2_mt_branch -f -v -p container=$1 -p branch=$2
-  echo "Deploying ${$2} to ${$1} as Multi Tenant Instance..."
-}
-
-alias rc="jenkins_restart_containers"
-jenkins_restart_containers() {
-  # stolen shamelessly from https://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script
-  echo "Are you sure you want to restart all containers?"
-  read -p "y/n " -n 1 -r
-  echo 
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
-    echo "Restarting containers..."
-    java -jar ~/Workspace/jenkins-cli.jar -noKeyAuth -s http://localdocker.marqeta.com:8090/ build restart_container -f -v
-  else
-    echo "Alrighty - quitter"
-  fi
 }
 
 # STOLEN LIKE A THIEF

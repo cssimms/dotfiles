@@ -46,12 +46,16 @@
         },
         {
           "before": ["<leader>", "d"],
-          // "commands": ["editor.debug.action.toggleBreakpoint"]
-          "after": ["o", "b", "i", "n", "d", "i", "n", "g", ".", "p", "r", "y", "<esc>"]
+          "commands": ["editor.debug.action.toggleBreakpoint"]
+          // "after": ["o", "b", "i", "n", "d", "i", "n", "g", ".", "p", "r", "y", "<esc>"]
         },
+        // {
+        //   "before":["<leader>", "r"],
+        //   "commands":[":reg"]
+        // },
         {
-          "before":["<leader>", "r"],
-          "commands":[":reg"]
+          "before":["<leader>", "r", "d"],
+          "commands":["editor.debug.action.removeAllBreakpoints"]
         },
         {
           "before":["<esc>"],
