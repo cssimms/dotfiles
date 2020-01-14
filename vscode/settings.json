@@ -68,7 +68,13 @@
           "commands":["workbench.action.quickOpenNavigateNextInEditorPicker"]
         }
     ],
-
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+          "before":["<esc>"],
+          "commands":[":nohl"],
+          "after":["<esc>"]
+        },
+    ],
     // ~~ Ruby ~~ //
     "breadcrumbs.enabled": true,
     "explorer.confirmDelete": false,
