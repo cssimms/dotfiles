@@ -7,10 +7,11 @@
 
 
     // ~~ WorkBench ~~ //
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Monokai Dimmed",
     "workbench.sideBar.location": "right",
+    "workbench.colorCustomizations" : {
+    },
     "workbench.editor.labelFormat": "short",
-    "workbench.panel.defaultLocation": "right",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.editor.enablePreviewFromQuickOpen": false,
 
@@ -19,7 +20,7 @@
     "editor.lineNumbers": "relative",
     "editor.tabSize": 2,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 88,
+    "editor.wordWrapColumn": 120,
     "editor.minimap.enabled": false,
     "editor.rulers": [
       80,
@@ -69,10 +70,28 @@
     ],
 
     // ~~ Ruby ~~ //
-    "ruby.useLanguageServer": true,
-    "ruby.codeCompletion": "rcodetools",
-    "ruby.intellisense": "rubyLocate",
     "breadcrumbs.enabled": true,
     "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[java]": {
+      "editor.tabSize": 4,
+      "editor.wordWrap": "off",
+  },
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "search.exclude": {
+    "**/.git": true
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "emmet.showSuggestionsAsSnippets": true
 }

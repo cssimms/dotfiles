@@ -67,6 +67,8 @@ alias gt="git tag --sort=-creatordate"
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
 
+# Git log of changes since last tag
+alias glt="git log $(git describe --tags --abbrev=0)..HEAD --oneline"
 # Pretty Git Log, pass the number of records to view
 alias gl="pretty_git_log $1"
 pretty_git_log() {
@@ -92,6 +94,7 @@ alias vrc="nvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
 alias vim="mvim -u ~/.nvimrc"
+alias work="cd ~/Workspace"
 
 # Wam Stuff
 
@@ -109,6 +112,7 @@ alias mon="cd ~/Workspace/wam/monterey"
 alias pd="cd ~/Workspace/wam/program-dashboard"
 alias volt="cd ~/Workspace/wam/wam/packages/voltron"
 alias sushi="cd ~/Workspace/wam/sushi_boat"
+alias 3ds="cd ~/Workspace/wam/3ds-challenge-lambdas"
 
 alias wp=ping_wam
 ping_wam() {
@@ -240,3 +244,8 @@ git_prompt() {
 }
 
 PS1='\u|$(git_prompt)|\W:~> '
+
+# Setting PATH for Python 3.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+export PATH
