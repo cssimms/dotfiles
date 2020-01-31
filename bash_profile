@@ -4,6 +4,9 @@
 PATH="$HOME/.jenv/bin:$PATH"
 PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 source ~/.git-completion.bash
 export VISUAL='/usr/local/bin/nvim'
 export EDITOR='$VISUAL'

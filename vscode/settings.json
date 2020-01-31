@@ -66,6 +66,18 @@
         {
           "before":["<leader>", "\\"],
           "commands":["workbench.action.quickOpenNavigateNextInEditorPicker"]
+        },
+        {
+          "before":["<leader>", "o", "n"],
+          "after":["?","i","t","(","<CR>","e","a",".","o","n","l","y","<esc>"]
+        },
+        {
+          "before":["<leader>", "t", "o", "n"],
+          "after":["g","g","/","d","e","s","c","r","i","b","e","<CR>","e","a",".","o","n","l","y","<esc>"]
+        },
+        {
+          "before":["<leader>","r", "o", "n"],
+          "after":["?","\\",".","o","n","l","y","<CR>","2","d","w"]
         }
     ],
     "vim.insertModeKeyBindingsNonRecursive": [
