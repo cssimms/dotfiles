@@ -3,6 +3,7 @@
 # jEnv in front, rvm wants to be in bashrc for some reason
 PATH="$HOME/.jenv/bin:$PATH"
 PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+PATH="$PATH:/Applications/Xcode.app/Contents/Developer/usr/bin/"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -25,6 +26,12 @@ fi
 gatling_helpers () {
   echo "JAVA_OPTS=\"-Denv=local1\" sh bin/gatling.sh -rf results/local/17-8-0/"
 }
+
+
+############ JAVA  ############
+
+export LIQUIBASE_HOME='/usr/local/opt/liquibase/libexec'
+
 
 # not tested ....
 swab()
@@ -90,7 +97,7 @@ alias cp="cp -i"
 alias ..="cd .."
 alias pud="pushd"
 alias ppd="popd"
-alias ll="ls -al"
+alias ll="ls -alh"
 alias grel="grep"
 alias bp="nvim ~/.bash_profile"
 alias vrc="nvim ~/.vimrc"
@@ -108,14 +115,13 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
-alias wam="cd ~/Workspace/wam"
-alias wdock="cd ~/Workspace/wam/wam-docker/"
-alias wd="cd ~/Workspace/wam/wam-docker/"
-alias mon="cd ~/Workspace/wam/monterey"
-alias pd="cd ~/Workspace/wam/program-dashboard"
-alias volt="cd ~/Workspace/wam/wam/packages/voltron"
-alias sushi="cd ~/Workspace/wam/sushi_boat"
-alias 3ds="cd ~/Workspace/wam/3ds-challenge-lambdas"
+alias wam="cd ~/Workspace/web-applications/wam"
+alias wdock="cd ~/Workspace/web-applications/wam-docker/"
+alias wd="cd ~/Workspace/web-applications/wam-docker/"
+alias mon="cd ~/Workspace/web-applications/monterey"
+alias pd="cd ~/Workspace/web-applications/program-dashboard"
+alias sushi="cd ~/Workspace/web-applications/sushi_boat"
+alias 3ds="cd ~/Workspace/web-applications/3ds-challenge-lambdas"
 
 alias wp=ping_wam
 ping_wam() {
@@ -141,6 +147,11 @@ alias sit="docker-compose down"
 alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
 
 alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
+
+# Will run docker container with plantuml server on localhost 8080
+alias plantuml="docker run -d -p 8080:8080 plantuml/plantuml-server:jetty"
+
+
 
 # Testing Stuff
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
@@ -252,3 +263,5 @@ PS1='\u|$(git_prompt)|\W:~> '
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
+
+export PATH="$HOME/.cargo/bin:$PATH"

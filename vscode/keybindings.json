@@ -33,7 +33,7 @@
         "command": "-workbench.action.showAllEditors"
     },
     {
-        "key": "ctrl+\\",
+        "key": "ctrl+shift+\\",
         "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
     },
     {
@@ -51,7 +51,7 @@
         "when": "inEditorsPicker && inQuickOpen"
     },
     {
-        "key": "ctrl+shift+\\",
+        "key": "ctrl+\\",
         "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup"
     },
     {
@@ -191,5 +191,39 @@
         "key": "shift+f4",
         "command": "-search.action.focusPreviousSearchResult",
         "when": "hasSearchResult"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.navigateToLastEditLocation"
+    },
+    {
+        "key": "cmd+k cmd+q",
+        "command": "-workbench.action.navigateToLastEditLocation"
+    },
+    {
+        "key": "cmd+k cmd+q",
+        "command": "-workbench.action.navigateToLastEditLocation"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "f6",
+        "command": "java.test.explorer.runAll"
+    },
+    {
+        "key": "f6",
+        "command": "-workbench.action.debug.pause",
+        "when": "debugState == 'running'"
     }
 ]

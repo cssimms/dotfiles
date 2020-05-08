@@ -22,6 +22,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 
 Plug 'pangloss/vim-javascript'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()            " required
 

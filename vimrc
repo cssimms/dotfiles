@@ -19,10 +19,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'tpope/vim-fugitive'
-
 Plugin 'Yggdroot/indentLine'
-
 Plugin 'tpope/vim-surround'
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
