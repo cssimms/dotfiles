@@ -4,10 +4,6 @@
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
-
-
-    // ~~ WorkBench ~~ //
-    "workbench.colorTheme": "Monokai Dimmed",
     "workbench.sideBar.location": "right",
     "workbench.colorCustomizations" : {
     },
@@ -99,17 +95,32 @@
   },
   "files.exclude": {
     "**/.classpath": true,
+    "**/.factorypath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "/coverage/**": true
   },
   "search.exclude": {
     "**/.git": true
   },
-  "eslint.autoFixOnSave": true,
   "eslint.run": "onSave",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "emmet.showSuggestionsAsSnippets": true
+  "emmet.showSuggestionsAsSnippets": true,
+  "workbench.editor.limit.enabled": true,
+  "plantuml.render": "PlantUMLServer",
+  "plantuml.server": "http://localhost:8080",
+  "eslint.format.enable": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+  "workbench.panel.defaultLocation": "right",
+  "debug.console.closeOnEnd": true,
+  "workbench.preferredDarkColorTheme": "Solarized Dark",
+  "workbench.colorTheme": "Kimbie Dark",
+  "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home",
+  "java.requirements.JDK11Warning": false,
+  "java.test.report.position": "currentView",
+  "java.semanticHighlighting.enabled": true
 }
