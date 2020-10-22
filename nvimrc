@@ -74,7 +74,7 @@ if has("gui_macvim")
   set background=dark
 else 
   " but in terminal want to match terminal
-  colorscheme base16-default-dark
+  colorscheme solarized
   set background=dark
 endif
 

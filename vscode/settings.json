@@ -110,17 +110,23 @@
   "emmet.showSuggestionsAsSnippets": true,
   "workbench.editor.limit.enabled": true,
   "plantuml.render": "PlantUMLServer",
-  "plantuml.server": "http://localhost:8080",
+  "plantuml.server": "https://www.plantuml.com/plantuml",
   "eslint.format.enable": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnType": true,
-  "editor.formatOnSave": true,
-  "workbench.panel.defaultLocation": "right",
   "debug.console.closeOnEnd": true,
   "workbench.preferredDarkColorTheme": "Solarized Dark",
   "workbench.colorTheme": "Kimbie Dark",
   "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home",
   "java.requirements.JDK11Warning": false,
   "java.test.report.position": "currentView",
-  "java.semanticHighlighting.enabled": true
+  "java.semanticHighlighting.enabled": true,
+  "editor.renderLineHighlight": "none",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "jest.pathToJest": "npm run test-watch --",
+  "prettier.disableLanguages": [
+    "ruby",
+    "erb"
+  ],
+  "editor.formatOnSave": true
 }
