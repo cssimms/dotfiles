@@ -122,5 +122,7 @@
   "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home",
   "java.requirements.JDK11Warning": false,
   "java.test.report.position": "currentView",
-  "java.semanticHighlighting.enabled": true
+  "java.semanticHighlighting.enabled": true,
+  "npm.enableScriptExplorer": true,
+  "editor.renderLineHighlight": "none"
 }
