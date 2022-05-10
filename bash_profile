@@ -73,6 +73,8 @@ alias gpm="git pull origin master"
 alias gstash="git stash"
 alias gsl="git stash list"
 alias gt="git tag --sort=-creatordate"
+# Interactive git checkout, local or remote - requires vim and fzf
+alias igch="git branch -a | FZF | xargs | sed -e's#^remotes/origin/##; s###' | xargs git checkout"
 
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
@@ -116,6 +118,9 @@ alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
 alias wam="cd ~/Workspace/web-applications/wam"
+alias amc="cd ~/Workspace/web-applications/wam/apps/amc"
+alias gql="cd ~/Workspace/web-applications/wam/apps/graphql"
+
 alias wdock="cd ~/Workspace/web-applications/wam-docker/"
 alias wd="cd ~/Workspace/web-applications/wam-docker/"
 alias mon="cd ~/Workspace/web-applications/monterey"
@@ -152,6 +157,16 @@ alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
 alias plantuml="docker run -d -p 8080:8080 plantuml/plantuml-server:jetty"
 
 
+# Listening on a PORT
+listening() {
+    if [ $# -eq 0 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
 
 # Testing Stuff
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
@@ -176,6 +191,16 @@ tag_diff_as_test() {
   git diff master --name-only | xargs mvim -c "bufdo exec \"norm 1 tes\""
   # Not able to cd back b/c we lose focus on bash. need another tool to return focus
   cd original_path
+}
+
+listening() {
+    if [ $# -eq 0 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
 }
 
 # STOLEN LIKE A THIEF

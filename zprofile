@@ -12,6 +12,7 @@ export VISUAL='/usr/local/bin/nvim'
 export EDITOR='$VISUAL'
 export GIT_EDITOR='$VISUAL'
 
+<<<<<<< HEAD
 ############ AUTO COMPLETE ############
 
 # Load git completions
@@ -19,16 +20,22 @@ if [ -f ~/.config/exercism/exercism_completion.bash ]; then
   . ~/.config/exercism/exercism_completion.bash
 fi
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 ############ HELPERS ############
 gatling_helpers () {
   echo "JAVA_OPTS=\"-Denv=local1\" sh bin/gatling.sh -rf results/local/17-8-0/"
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 ############ JAVA  ############
 
 export LIQUIBASE_HOME='/usr/local/opt/liquibase/libexec'
 
+<<<<<<< HEAD
 
 # not tested ....
 swab()
@@ -51,6 +58,8 @@ c_cyan="\[\033[0;36m\]"
 c_git_clean='\[\e[0;32m\]'
 c_green='\[\e[0;32m\]'
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 # Ignore Duplicates in History
 export HISTCONTROL=ignoredups
 
@@ -70,6 +79,11 @@ alias gpm="git pull origin master"
 alias gstash="git stash"
 alias gsl="git stash list"
 alias gt="git tag --sort=-creatordate"
+<<<<<<< HEAD
+=======
+# Interactive git checkout, local or remote - requires vim and fzf
+alias igch="git branch -a | FZF | xargs | sed -e's#^remotes/origin/##; s###' | xargs git checkout"
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
@@ -83,10 +97,13 @@ pretty_git_log() {
   git log -${lines_to_show} --pretty=format:'%h - %an, %ar : %s'
 }
 
+<<<<<<< HEAD
 # Set AutoComplete for Git Alias'
 __git_complete gch _git_checkout
 __git_complete gb _git_branch
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 # General Use Alias
 alias reload="source ~/.zprofile"
 alias mv="mv -i"
@@ -113,6 +130,12 @@ alias be="bundle exec"
 alias rr="bundle exec rake routes"
 alias rail="rails"
 alias wam="cd ~/Workspace/web-applications/wam"
+<<<<<<< HEAD
+=======
+alias amc="cd ~/Workspace/web-applications/wam/apps/amc"
+alias gql="cd ~/Workspace/web-applications/wam/apps/graphql"
+
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 alias wdock="cd ~/Workspace/web-applications/wam-docker/"
 alias wd="cd ~/Workspace/web-applications/wam-docker/"
 alias mon="cd ~/Workspace/web-applications/monterey"
@@ -120,6 +143,7 @@ alias pd="cd ~/Workspace/web-applications/program-dashboard"
 alias sushi="cd ~/Workspace/web-applications/sushi_boat"
 alias 3ds="cd ~/Workspace/web-applications/3ds-challenge-lambdas"
 
+<<<<<<< HEAD
 alias wp=ping_wam
 ping_wam() {
   echo -e "\n___ PAPI ___"
@@ -131,6 +155,8 @@ ping_wam() {
   echo -e "\n"
 }
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 # Docker Env Stuff
 alias wdock="cd ~/Workspace/wam/wam-docker/"
 alias wd="cd ~/Workspace/wam/wam-docker/"
@@ -142,13 +168,29 @@ alias dc="docker-compose"
 alias stand="docker-compose up -d && docker-compose logs -f"
 alias sit="docker-compose down"
 alias dps="docker ps --format \"table {{.Names}}\\t{{.Image}}\\t{{.RunningFor}} ago\\t{{.Status}}\\t{{.Ports}}\""
+<<<<<<< HEAD
 
+=======
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 alias dpsp="docker ps --format \"table {{.Names}}\\t{{.Ports}}\""
 
 # Will run docker container with plantuml server on localhost 8080
 alias plantuml="docker run -d -p 8080:8080 plantuml/plantuml-server:jetty"
 
+<<<<<<< HEAD
 
+=======
+# Listening on a PORT
+listening() {
+    if [ $# -eq 0 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 
 # Testing Stuff
 alias vgrnt="cd ~/Workspace/jpos-vagrant"
@@ -174,6 +216,7 @@ tag_diff_as_test() {
   # Not able to cd back b/c we lose focus on bash. need another tool to return focus
   cd original_path
 }
+<<<<<<< HEAD
 
 # STOLEN LIKE A THIEF
 # Adds the current branch to the bash prompt when the working directory is
@@ -256,6 +299,9 @@ git_prompt() {
 
 PS1='\u|$(git_prompt)|\W:~> '
 
+=======
+#
+>>>>>>> e67cf76c74ae4310a13ba99991bf1c32549566cb
 # Setting PATH for Python 3.7
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
