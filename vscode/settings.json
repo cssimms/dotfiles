@@ -1,97 +1,127 @@
 {
-    "files.autoSave": "onFocusChange",
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 0,
-    "workbench.sideBar.location": "right",
-    "workbench.colorCustomizations" : {
+  "files.autoSave": "onFocusChange",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "window.zoomLevel": 0,
+  "workbench.sideBar.location": "right",
+  "workbench.colorCustomizations": {},
+  "workbench.editor.labelFormat": "short",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+
+  // ~~ Editor ~~ //
+  "editor.fontFamily": "Menlo, Monaco",
+  "editor.lineNumbers": "relative",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80, 120],
+
+  "keyboard.dispatch": "keyCode",
+
+  // ~~ Vim related ~~ //
+  "vim.hlsearch": true,
+  "vim.useCtrlKeys": true,
+  "vim.useSystemClipboard": false,
+
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.files.save"]
     },
-    "workbench.editor.labelFormat": "short",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-
-    // ~~ Editor ~~ //
-    "editor.fontFamily": "Menlo, Monaco",
-    "editor.lineNumbers": "relative",
-    "editor.tabSize": 2,
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 120,
-    "editor.minimap.enabled": false,
-    "editor.rulers": [
-      80,
-      120
-    ],
-
-    "keyboard.dispatch": "keyCode",
-
-
-    // ~~ Vim related ~~ //
-    "vim.hlsearch": true,
-    "vim.useCtrlKeys": true,
-    "vim.useSystemClipboard": false,
-
-    "vim.leader": "<space>",
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-          "before": ["<leader>", "s"],
-          "commands": ["workbench.action.files.save"]
-        },
-        {
-          "before": ["<C-n>"],
-          "commands": [":nohl"]
-        },
-        {
-          "before": ["<leader>", "d"],
-          "commands": ["editor.debug.action.toggleBreakpoint"]
-          // "after": ["o", "b", "i", "n", "d", "i", "n", "g", ".", "p", "r", "y", "<esc>"]
-        },
-        // {
-        //   "before":["<leader>", "r"],
-        //   "commands":[":reg"]
-        // },
-        {
-          "before":["<leader>", "r", "d"],
-          "commands":["editor.debug.action.removeAllBreakpoints"]
-        },
-        {
-          "before":["<esc>"],
-          "commands":[":nohl"],
-          "after":["<esc>"]
-        },
-        {
-          "before":["<leader>", "\\"],
-          "commands":["workbench.action.quickOpenNavigateNextInEditorPicker"]
-        },
-        {
-          "before":["<leader>", "o", "n"],
-          "after":["?","i","t","(","<CR>","e","a",".","o","n","l","y","<esc>"]
-        },
-        {
-          "before":["<leader>", "t", "o", "n"],
-          "after":["g","g","/","d","e","s","c","r","i","b","e","<CR>","e","a",".","o","n","l","y","<esc>"]
-        },
-        {
-          "before":["<leader>","r", "o", "n"],
-          "after":["?","\\",".","o","n","l","y","<CR>","2","d","w"]
-        }
-    ],
-    "vim.insertModeKeyBindingsNonRecursive": [
-        {
-          "before":["<esc>"],
-          "commands":[":nohl"],
-          "after":["<esc>"]
-        },
-    ],
-    // ~~ Ruby ~~ //
-    "breadcrumbs.enabled": true,
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "[java]": {
-      "editor.tabSize": 4,
-      "editor.wordWrap": "off",
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["editor.debug.action.toggleBreakpoint"]
+      // "after": ["o", "b", "i", "n", "d", "i", "n", "g", ".", "p", "r", "y", "<esc>"]
+    },
+    // {
+    //   "before":["<leader>", "r"],
+    //   "commands":[":reg"]
+    // },
+    {
+      "before": ["<leader>", "r", "d"],
+      "commands": ["editor.debug.action.removeAllBreakpoints"]
+    },
+    {
+      "before": ["<esc>"],
+      "commands": [":nohl"],
+      "after": ["<esc>"]
+    },
+    {
+      "before": ["<leader>", "\\"],
+      "commands": ["workbench.action.quickOpenNavigateNextInEditorPicker"]
+    },
+    {
+      "before": ["<leader>", "o", "n"],
+      "after": [
+        "?",
+        "i",
+        "t",
+        "(",
+        "<CR>",
+        "e",
+        "a",
+        ".",
+        "o",
+        "n",
+        "l",
+        "y",
+        "<esc>"
+      ]
+    },
+    {
+      "before": ["<leader>", "t", "o", "n"],
+      "after": [
+        "g",
+        "g",
+        "/",
+        "d",
+        "e",
+        "s",
+        "c",
+        "r",
+        "i",
+        "b",
+        "e",
+        "<CR>",
+        "e",
+        "a",
+        ".",
+        "o",
+        "n",
+        "l",
+        "y",
+        "<esc>"
+      ]
+    },
+    {
+      "before": ["<leader>", "r", "o", "n"],
+      "after": ["?", "\\", ".", "o", "n", "l", "y", "<CR>", "2", "d", "w"]
+    }
+  ],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<esc>"],
+      "commands": [":nohl"],
+      "after": ["<esc>"]
+    }
+  ],
+  // ~~ Ruby ~~ //
+  "breadcrumbs.enabled": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "[java]": {
+    "editor.tabSize": 4,
+    "editor.wordWrap": "off"
   },
   "files.exclude": {
     "**/.classpath": true,
@@ -116,7 +146,7 @@
   "editor.formatOnType": true,
   "debug.console.closeOnEnd": true,
   "workbench.preferredDarkColorTheme": "Solarized Dark",
-  "workbench.colorTheme": "Kimbie Dark",
+  "workbench.colorTheme": "Solarized Light",
   "java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home",
   "java.requirements.JDK11Warning": false,
   "java.test.report.position": "currentView",
@@ -124,9 +154,9 @@
   "editor.renderLineHighlight": "none",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "jest.pathToJest": "npm run test-watch --",
-  "prettier.disableLanguages": [
-    "ruby",
-    "erb"
-  ],
-  "editor.formatOnSave": true
+  "prettier.disableLanguages": ["ruby", "erb"],
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
