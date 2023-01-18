@@ -16,27 +16,9 @@ export GIT_EDITOR='$VISUAL'
 
 export LIQUIBASE_HOME='/usr/local/opt/liquibase/libexec'
 
-
-# not tested ....
-swab()
-{
-  git branch --merged master --no-color | grep -v '^[ *]*master$' | xargs -n1 git branch -d
-}
-############ fzf/ag/whateverthefuck ############
-#export FZF_DEFAULT_COMMAND="ag -g \"\" --path-to-ignore ~/.ignore"
-
-############ COOLORS ############
-
-# \[\e[0m\] resets the color to default color
-c_reset='\[\e[0m\]'
-# \e[0;31m\ sets the color to red
-c_git_dirty='\[\e[0;31m\]'
-c_red='\[\e[0;31m\]'
-# \033[0;36m\ sets the color to cyan
-c_cyan="\[\033[0;36m\]"
-# \e[0;32m\ sets the color to green
-c_git_clean='\[\e[0;32m\]'
-c_green='\[\e[0;32m\]'
+####### nothing works first try ... trying to get ctrl r working in zsh
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 # Ignore Duplicates in History
 export HISTCONTROL=ignoredups
@@ -63,8 +45,6 @@ alias igch="git branch -a | FZF | xargs | sed -e's#^remotes/origin/##; s###' | x
 # removes local branches that have been merged
 alias gbranchclean="git branch --merged | grep -v \"\\*\" | grep -v master | xargs -n 1 git branch -d"
 
-# Git log of changes since last tag
-alias glt="git log $(git describe --tags --abbrev=0)..HEAD --oneline"
 # Pretty Git Log, pass the number of records to view
 alias gl="pretty_git_log $1"
 pretty_git_log() {
@@ -87,8 +67,6 @@ alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
 alias vim="mvim -u ~/.nvimrc"
 alias work="cd ~/Workspace"
-
-# Wam Stuff
 
 # FzF config
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -118,91 +96,6 @@ listening() {
         echo "Usage: listening [pattern]"
     fi
 }
-
-# Testing Stuff
-alias rspcf="rspec --format documentation"
-alias rspecf="rspec --format documentation"
-
-# STOLEN LIKE A THIEF
-# Adds the current branch to the bash prompt when the working directory is
-# part of a Git repository. Includes color-coding and indicators to quickly
-# indicate the status of working directory.
-#
-# To use: Copy into ~/.bashrc and tweak if desired.
-#
-# Based upon the following gists:
-# <https://gist.github.com/henrik/31631>
-# <https://gist.github.com/srguiwiz/de87bf6355717f0eede5>
-# Modified by me, using ideas from comments on those gists.
-#
-# License: MIT, unless the authors of those two gists object :)
-
-git_branch() {
-    # -- Finds and outputs the current branch name by parsing the list of
-    #    all branches
-    # -- Current branch is identified by an asterisk at the beginning
-    # -- If not in a Git repository, error message goes to /dev/null and
-    #    no output is produced
-    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | cut -c1-7
-}
-
-git_status() {
-    # Outputs a series of indicators based on the status of the
-    # working directory:
-    # + changes are staged and ready to commit
-    # ! unstaged changes are present
-    # ? untracked files are present
-    # S changes have been stashed
-    # P local commits need to be pushed to the remote
-    local status="$(git status --porcelain 2>/dev/null)"
-    local output=''
-    [[ -n $(egrep '^[MADRC]' <<<"$status") ]] && output="$output+"
-    [[ -n $(egrep '^.[MD]' <<<"$status") ]] && output="$output!"
-    [[ -n $(egrep '^\?\?' <<<"$status") ]] && output="$output?"
-    [[ -n $(git stash list) ]] && output="${output}S"
-    [[ -n $(git log --branches --not --remotes) ]] && output="${output}P"
-    [[ -n $output ]] && output="|$output"  # separate from branch name
-    echo $output
-}
-
-git_color() {
-    # Receives output of git_status as argument; produces appropriate color
-    # code based on status of working directory:
-    # - White if everything is clean
-    # - Green if all changes are staged
-    # - Red if there are uncommitted changes with nothing staged
-    # - Yellow if there are both staged and unstaged changes
-    # - Blue if there are unpushed commits
-    local staged=$([[ $1 =~ \+ ]] && echo yes)
-    local dirty=$([[ $1 =~ [!\?] ]] && echo yes)
-    local needs_push=$([[ $1 =~ P ]] && echo yes)
-    if [[ -n $staged ]] && [[ -n $dirty ]]; then
-        echo -e '\033[1;33m'  # bold yellow
-    elif [[ -n $staged ]]; then
-        echo -e '\033[1;32m'  # bold green
-    elif [[ -n $dirty ]]; then
-        echo -e '\033[1;31m'  # bold red
-    elif [[ -n $needs_push ]]; then
-        echo -e '\033[1;34m' # bold blue
-    else
-        echo -e '\033[1;37m'  # bold white
-    fi
-}
-
-git_prompt() {
-    # First, get the branch name...
-    local branch=$(git_branch)
-    # Empty output? Then we're not in a Git repository, so bypass the rest
-    # of the function, producing no output
-    if [[ -n $branch ]]; then
-        local state=$(git_status)
-        local color=$(git_color $state)
-        # Now output the actual code to insert the branch and status
-        echo -e "\x01$color\x02[$branch$state]\x01\033[00m\x02"  # last bit resets color
-    fi
-}
-
-PS1='\u|$(git_prompt)|\W:~> '
 
 # auto set by vscode
 # Setting PATH for Python 3.7
