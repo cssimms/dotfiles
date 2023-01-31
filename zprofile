@@ -65,7 +65,6 @@ alias zp="nvim ~/.zprofile"
 alias vrc="nvim ~/.vimrc"
 alias nrc="nvim ~/.nvimrc"
 alias notes="cd ~/Workspace/notes && nvim ."
-alias vim="mvim -u ~/.nvimrc"
 alias work="cd ~/Workspace"
 
 # FzF config
