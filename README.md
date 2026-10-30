@@ -42,3 +42,18 @@ brew install the_silver_searcher
   Not even going to detail the steps, must download colorshemes from github,
   possibly creating `~/.config/nvim/colors/`, etc. etc.
 
+
+### Kitty + herdr
+kitty runs as a dedicated herdr host: its `shell` is herdr,
+and Cmd shortcuts send herdr's prefix (F12) plus a key. `kitty/herdr.conf` and `herdr/config.toml`
+must agree on that prefix.
+
+```
+brew install herdr
+brew install --cask kitty font-jetbrains-mono-nerd-font
+./install-terminal.sh
+```
+
+The script symlinks `kitty/` to `~/.config/kitty` and `herdr/config.toml` into `~/.config/herdr/`
+(only the toml; that directory also holds herdr's sockets, logs, and session state). Existing files
+are moved aside with a `.bak-<timestamp>` suffix. `Cmd+Shift+N` opens a plain zsh window outside herdr.

@@ -1,0 +1,10 @@
+onboarding = false
+
+[keys]
+# F12 is never typed by hand: the kitty host (~/.config/kitty/herdr.conf) sends it
+# for Cmd shortcuts, and Cmd+B sends it bare. Frees ctrl+b for Claude Code.
+prefix = "f12"
+previous_workspace = "prefix+["
+next_workspace = "prefix+]"
+next_agent = "prefix+a"
+previous_agent = "prefix+shift+a"
